@@ -15,7 +15,9 @@
 <div class="jumbotron jumbotron-fluid">
   <div class="container">
     <h1 class="display-4">Your Balances</h1>
-    <p class="lead">1000 XLM</p>
+   {% for balance in balances %}
+    <p class="lead">{{ balance.asset_code }}: {{ balance.balance }} </p>
+    {% endfor %}
   </div>
 </div>
 {% endif %}

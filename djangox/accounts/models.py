@@ -16,4 +16,4 @@ class StellarAccount(models.Model):
     public_key = models.CharField(max_length=300)
 
     def __str__(self):
-        return self.accountId
+        return self.accountId.username
