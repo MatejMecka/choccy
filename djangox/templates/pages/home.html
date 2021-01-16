@@ -38,6 +38,7 @@
       <th scope="col">Account</th>
       <th scope="col">Asset</th>
       <th scope="col">Amount</th>
+      <th scope="col">Action</th>
   </tr>
   </thead>
   <tbody>
@@ -46,6 +47,7 @@
       <th scope="row">{{ balance.sponsor }}</th>
       <td>{{ balance.asset }}</td>
       <td>{{ balance.amount }}</td>
+      <td><a href="{% url 'claim-balance' balance.id %}" class="btn btn-primary" role="button">Claim</a></td>
     </tr>
 {% endfor %}
 </tbody>

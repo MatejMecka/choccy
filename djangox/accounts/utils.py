@@ -24,6 +24,43 @@ def getClaimableBalances(public_key: str) -> list:
     balances = server.claimable_balances().for_claimant(public_key).call()['_embedded']['records']
     return [ {"sponsor": elem.get("sponsor"), "id": elem.get("id"), "asset": elem.get("asset").replace('native', 'XLM'), "amount": round(int(float(elem.get("amount"))))} for elem in balances ]
 
+def getClaimableBalance(id: str) -> dict:
+    """
+    Get a claimable balances by id.
+    """
+    balance = server.claimable_balances().claimable_balance(id).call()
+    return {"asset": balance.get("asset")}
+
+def claimBalance(id, private_key):
+    """
+    Claim a Claimable balance
+    """
+    user_keypair = Keypair.from_secret(private_key)
+    user_pub_key = user_keypair.public_key
+
+    print(user_pub_key)
+    base_fee = server.fetch_base_fee()*3
+    account = server.load_account(user_pub_key)
+
+    transaction = TransactionBuilder(
+        source_account=account,
+        network_passphrase=Network.TESTNET_NETWORK_PASSPHRASE
+    ).append_claim_claimable_balance_op(
+        balance_id=id,
+        source=user_pub_key
+    ).build()
+
+    transaction.sign(private_key)
+    response = server.submit_transaction(transaction)
+
+    try:
+        return True, f"https://stellar.expert/explorer/testnet/tx/{response['id']}" # Another thing to change
+    except:
+        return False
+
+
+
+
 def generateAccount() -> dict:
     """
     Generate an Account for a User who never made an account with Stellar

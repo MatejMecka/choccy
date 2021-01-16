@@ -27,3 +27,6 @@ class ChangeStellarPublicKey(forms.ModelForm):
     class Meta:
         model = StellarAccount
         fields = ('public_key',)
+
+class StellarPrivateKeyForm(forms.Form):
+    private_key = forms.CharField(label='Stellar Private Key', max_length=100)

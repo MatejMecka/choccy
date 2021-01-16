@@ -3,10 +3,10 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseForbidden
-from accounts.forms import ChangeUserInfo, ChangeStellarPublicKey
+from accounts.forms import ChangeUserInfo, ChangeStellarPublicKey, StellarPrivateKeyForm
 from accounts.models import CustomUser, StellarAccount
 from django.shortcuts import redirect
-from .utils import generateAccount
+from .utils import generateAccount, getClaimableBalance, claimBalance
 
 # Create your views here.
 @login_required
@@ -75,4 +75,19 @@ def create_stellar_account(request):
 
     form = ChangeStellarPublicKey()
     return render(request, 'account/edit_payment_information.html', {'form': form})
-    
+
+def claim_balance(request, balance_id):
+    form = StellarPrivateKeyForm()
+    if request.method == 'POST':
+        form = StellarPrivateKeyForm(request.POST)
+        if form.is_valid():
+            balance_info = getClaimableBalance(balance_id)
+            if balance_info["asset"] == "native":
+                status, url = claimBalance(balance_id, form.data["private_key"])
+                print(url)
+                messages.success(request, f'Transaction Succeded! View it at {url}')
+        else:
+            print(form.errors)
+            messages.warning(request, form.errors)
+            
+    return render(request, 'account/claim_balance.html', {'form': form})
