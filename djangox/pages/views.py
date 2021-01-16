@@ -1,6 +1,6 @@
 from django.views.generic import TemplateView
 from accounts.models import StellarAccount
-from accounts.utils import getAssets
+from accounts.utils import getAssets, getClaimableBalances
 
 class HomePageView(TemplateView):
     template_name = 'pages/home.html'
@@ -17,7 +17,14 @@ class HomePageView(TemplateView):
             # Get Assets
             assets = getAssets(public_key)
             context["balances"] = assets
+            
+            # Get claimable balances
+            balances = getClaimableBalances(public_key)
+            context["claimable_balances"] = balances
+            
             return context
+
+
 
 class AboutPageView(TemplateView):
     template_name = 'pages/about.html'

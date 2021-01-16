@@ -22,7 +22,29 @@
 </div>
 
 <h1>Pending Claimable Balances</h1>
+{% if claimable_balances|length > 1 %}
+<table class="table">
+  <thead>
+  <tr>
+      <th scope="col">Account</th>
+      <th scope="col">Asset</th>
+      <th scope="col">Amount</th>
+  </tr>
+  </thead>
+  <tbody>
+{% for balance in claimable_balances %}
+    <tr>
+      <th scope="row">{{ balance.sponsor }}</th>
+      <td>{{ balance.asset }}</td>
+      <td>{{ balance.amount }}</td>
+    </tr>
+{% endfor %}
+</tbody>
+</table>
+{% else %}
 <p>No Pending Claimable Balances  </p>
+{% endif%}
+
 <hr></hr>
 <h1>Past Transactions</h1>
 <p>No Past Transactions have been found  </p>
