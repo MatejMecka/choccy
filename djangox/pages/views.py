@@ -12,11 +12,12 @@ class HomePageView(TemplateView):
         # Create Context
         context = super(HomePageView, self).get_context_data(*args, **kwargs)
         user = self.request.user
-        public_key = StellarAccount.objects.filter(accountId=user)[0].public_key
-        # Get Assets
-        assets = getAssets(public_key)
-        context["balances"] = assets
-        return context
+        if not user.is_anonymous:
+            public_key = StellarAccount.objects.filter(accountId=user)[0].public_key
+            # Get Assets
+            assets = getAssets(public_key)
+            context["balances"] = assets
+            return context
 
 class AboutPageView(TemplateView):
     template_name = 'pages/about.html'
