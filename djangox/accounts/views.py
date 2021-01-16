@@ -25,6 +25,11 @@ def edit_account_info(request):
 
 @login_required
 def edit_payment_info(request):
+    try:
+        data = StellarAccount.objects.get(accountId=request.user)
+    except StellarAccount.DoesNotExist:
+        data = None
+
     if request.method == 'POST':
         form = ChangeStellarPublicKey(request.POST)
         if form.is_valid():
@@ -33,11 +38,10 @@ def edit_payment_info(request):
             messages.warning(request, form.errors)
     else:
         try:
-            data = StellarAccount.objects.get(accountId=request.user)
             form = ChangeStellarPublicKey(instance=data)
         except:
             form = ChangeStellarPublicKey()
-    return render(request, 'account/edit_payment_information.html', {'form': form})
+    return render(request, 'account/edit_payment_information.html', {'form': form, 'public_key': data})
 
 """
 @csrf_exempt # Probably not a Good idea but it's a hackathon so...

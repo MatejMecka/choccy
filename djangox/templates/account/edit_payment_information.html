@@ -23,10 +23,12 @@
   <button class="btn btn-success" type="submit">Submit</button>
 </form>
 
+{% if public_key.public_key|length <= 0 %}
 <h1>I do not have a Stellar Account</h1>
 
 <form action="create-account-stellar" method="post">
   {% csrf_token %}
   <button class="btn btn-success" type="submit">Create an Account</button>
 </form>
+{% endif %}
 {% endblock content %}
