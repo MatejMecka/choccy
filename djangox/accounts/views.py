@@ -6,7 +6,7 @@ from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseForbid
 from accounts.forms import ChangeUserInfo, ChangeStellarPublicKey, StellarPrivateKeyForm
 from accounts.models import CustomUser, StellarAccount
 from django.shortcuts import redirect
-from .utils import generateAccount, getClaimableBalance, claimBalance
+from .utils import generateAccount, getClaimableBalance, claimBalance, verifyItExists, getAssets
 
 # Create your views here.
 @login_required
@@ -78,16 +78,40 @@ def create_stellar_account(request):
 
 def claim_balance(request, balance_id):
     form = StellarPrivateKeyForm()
+    establishTrustline = False
+
+    balance_info = getClaimableBalance(balance_id)
+    if balance_info["asset"][0] == "native":
+        balance_info["asset"][0] = 'XLM'
+        establishTrustline = False
+    else:
+        # This is kids why you need to learn about Hash Maps <3
+        account = StellarAccount.objects.get(accountId=request.user).public_key
+        for asset in getAssets(account):
+            if asset['asset_code'] == balance_info["asset"][0] and asset['issuer'] == balance_info["asset"][1]:
+                print(asset['asset_code'] + '\t' + balance_info["asset"][0])
+                establishTrustline = False
+                break
+            else:
+                establishTrustline = True
+           
+
     if request.method == 'POST':
         form = StellarPrivateKeyForm(request.POST)
         if form.is_valid():
-            balance_info = getClaimableBalance(balance_id)
-            if balance_info["asset"] == "native":
-                status, url = claimBalance(balance_id, form.data["private_key"])
+            try:
+                balance_info = getClaimableBalance(balance_id)
+                if not establishTrustline:
+                    status, url = claimBalance(balance_id, form.data["private_key"])
+                else:
+                    status, url = claimBalance(balance_id, form.data["private_key"], balance_info["asset"][0], balance_info["asset"][1])
+
                 print(url)
                 messages.success(request, f'Transaction Succeded! View it at {url}')
+            except:
+                messages.warning(request, 'Something went wrong.')
         else:
             print(form.errors)
             messages.warning(request, form.errors)
-            
-    return render(request, 'account/claim_balance.html', {'form': form})
+
+    return render(request, 'account/claim_balance.html', {'form': form, 'establishTrustline': establishTrustline, 'balance_info': balance_info})

@@ -19,7 +19,11 @@
 
 <p>The following operations will occur! </p>
 
-<p><b>Claim XLM with an Amount of 100</b></p>
+{% if establishTrustline == True %}
+<p><b>Establish Trustline with {{ balance_info.asset|first }} Issued by {{balance_info.asset.1 }} </b></p>
+{% endif %}
+
+<p><b>Claim {{ balance_info.asset|first }} with an Amount of {{ balance_info.amount }}</b></p>
 
 <p>In Order to proceed a signature with your private key is required.</p>
 
