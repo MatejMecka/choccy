@@ -9,6 +9,7 @@
 <meta name="description" content="A framework for launching new Django projects quickly.">
 <meta name="author" content="">
 <link rel="shortcut icon" type="image/x-icon" href="{% static 'images/favicon.ico' %}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" />
 
 {% block css %}
 <!-- Bootstrap CSS -->
@@ -25,6 +26,9 @@
         <a href="{% url 'home' %}">DjangoX</a>
       </h5>
       <a class="p-2 text-dark" href="{% url 'about' %}">About</a>
+      {% if user.is_authenticated %}
+      <a class="p-2 text-dark" href="{% url 'view-user' user.username %}">View My Profile</a>
+      {% endif  %}
       <nav class="my-2 my-md-0 mr-md-3">
         {% if user.is_authenticated %}
         <ul class="navbar-nav ml-auto">
@@ -36,7 +40,9 @@
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userMenu">
               <a class="dropdown-item" href="{% url 'edit-account' %}">Change Account information</a>
               <a class="dropdown-item" href="{% url 'edit-payment-info' %}">Change Payment information</a>
+              <a class="dropdown-item" href="{% url 'edit-profile-page' %}">Change Public Profile information</a>
               <a class="dropdown-item" href="{% url 'account_change_password' %}">Change password</a>
+            
               <div class="dropdown-divider"></div>
               <a class="dropdown-item" href="{% url 'account_logout' %}">Log out</a>
             </div>

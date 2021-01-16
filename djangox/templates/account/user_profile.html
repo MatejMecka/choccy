@@ -1,0 +1,58 @@
+{% extends '_base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}{{ user.username }}{% endblock %}
+
+{% block content %}
+
+{% for message in messages %}
+  <div class="alert-{{ message.tags }} alert-dismissible" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    {{ message }}
+  </div>
+{% endfor %}
+
+
+<h1>{{ user.first_name }} {{ user.last_name }}</h1>
+<h3>{{ public_info.short_description }} </h3>
+<hr></hr>
+<h5>{{ public_info.description }} </h5>
+<i class="fa fa-twitter"></i>
+
+<h1>Support this creator</h1>
+
+<form method="post" action="{{ request.path }}">
+  {% csrf_token %}
+  {{ form|crispy }}
+  <button class="btn btn-success" type="submit">Sign Transaction</button>
+</form>
+
+<script>
+if(document.querySelector('.alert-error') !== null){
+    document.querySelector('.alert-error').classList.add('alert-danger');
+    document.querySelector('.alert-error').classList.remove('alert-error');
+}
+
+var asset_name = document.querySelector('#div_id_asset_name')
+var asset_issuer = document.querySelector('#div_id_asset_issuer')
+
+asset_name.style.display="none"
+asset_issuer.style.display="none"
+
+var element = document.querySelector('select')
+
+element.onchange = function(){
+    if(element.value == 5){
+        asset_name.style.display="block"
+        asset_issuer.style.display="block"
+    } else {
+        asset_name.style.display="none"
+        asset_issuer.style.display="none"
+    }
+    
+}
+</script>
+
+{% endblock content %}

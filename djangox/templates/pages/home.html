@@ -14,7 +14,7 @@
 {% if user.is_authenticated %}
 <div class="jumbotron jumbotron-fluid">
   <div class="container">
-    {% if balances|length > 1 %}
+    {% if balances|length > 0 %}
     <h1 class="display-4">Your Balances</h1>
       {% for balance in balances %}
         <p class="lead">{{ balance.asset_code }}: {{ balance.balance }} </p>
@@ -22,7 +22,7 @@
     {% else %}
       <h1 class="display-4">Welcome new User!</h1>
       <h5 class="display-4">Let's get started setting up your new account</h1>
-
+      <p>If you setup everything and see this it means you haven't received any Assets</p>  
       <a href="{% url 'edit-account' %}" class="btn btn-primary btn-lg" role="button">Setup Account information</a>
       <a href="{% url 'edit-payment-info' %}" class="btn btn-primary btn-lg" role="button">Setup Payment information</a>
 
@@ -31,7 +31,7 @@
 </div>
 
 <h1>Pending Claimable Balances</h1>
-{% if claimable_balances|length > 1 %}
+{% if claimable_balances|length > 0 %}
 <table class="table">
   <thead>
   <tr>
