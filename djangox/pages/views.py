@@ -13,15 +13,19 @@ class HomePageView(TemplateView):
         context = super(HomePageView, self).get_context_data(*args, **kwargs)
         user = self.request.user
         if not user.is_anonymous:
-            public_key = StellarAccount.objects.filter(accountId=user)[0].public_key
-            # Get Assets
-            assets = getAssets(public_key)
-            context["balances"] = assets
+            try:
+                public_key = StellarAccount.objects.filter(accountId=user)[0].public_key
             
-            # Get claimable balances
-            balances = getClaimableBalances(public_key)
-            context["claimable_balances"] = balances
-            
+                # Get Assets
+                assets = getAssets(public_key)
+                context["balances"] = assets
+                
+                # Get claimable balances
+                balances = getClaimableBalances(public_key)
+                context["claimable_balances"] = balances
+                
+            except:
+                pass
             return context
 
 

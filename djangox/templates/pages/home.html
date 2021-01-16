@@ -14,10 +14,19 @@
 {% if user.is_authenticated %}
 <div class="jumbotron jumbotron-fluid">
   <div class="container">
+    {% if balances|length > 1 %}
     <h1 class="display-4">Your Balances</h1>
-   {% for balance in balances %}
-    <p class="lead">{{ balance.asset_code }}: {{ balance.balance }} </p>
-    {% endfor %}
+      {% for balance in balances %}
+        <p class="lead">{{ balance.asset_code }}: {{ balance.balance }} </p>
+      {% endfor %}
+    {% else %}
+      <h1 class="display-4">Welcome new User!</h1>
+      <h5 class="display-4">Let's get started setting up your new account</h1>
+
+      <a href="{% url 'edit-account' %}" class="btn btn-primary btn-lg" role="button">Setup Account information</a>
+      <a href="{% url 'edit-payment-info' %}" class="btn btn-primary btn-lg" role="button">Setup Payment information</a>
+
+    {% endif %}
   </div>
 </div>
 

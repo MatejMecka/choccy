@@ -1,0 +1,20 @@
+{% extends '_base.html' %}
+
+{% block title %}Congrats on your new Stellar Account{% endblock %}
+
+{% block content %}
+<h1>Congrats on your new Stellar Account!</h1>
+
+<p>Congragulations on creating your first account on the Stellar Network! </p>
+
+<p>You are now ready to accept donations from other Members on todo think of name for this</p>
+
+<p><b>Warning</b> Before you close this tab store the following keys somewhere safe. You won't see them ever again.</p>
+
+<p><b>Public Key:</b> {{ keys.public_key }}</p>
+
+<p><b>Private Key:</b> {{ keys.private_key }}</p>
+
+
+
+{% endblock content %}

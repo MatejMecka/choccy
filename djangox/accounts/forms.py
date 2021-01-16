@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.contrib.auth.models import User
-from .models import CustomUser
+from .models import CustomUser, StellarAccount
 
 class CustomUserCreationForm(UserCreationForm):
 
@@ -19,4 +19,11 @@ class ChangeUserInfo(forms.ModelForm):
 
     class Meta:
         model = CustomUser
-        fields = ('username','first_name', 'last_name', 'email')
+        fields = ('first_name', 'last_name', 'email')
+
+
+class ChangeStellarPublicKey(forms.ModelForm):
+
+    class Meta:
+        model = StellarAccount
+        fields = ('public_key',)
