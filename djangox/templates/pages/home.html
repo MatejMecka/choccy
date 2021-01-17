@@ -9,6 +9,7 @@
   <img src="{% static 'images/logo.png' %}" class="img-fluid" alt="DjangoX logo"/>
   <p class="lead">A Django starter project with batteries.</p>
 </div>
+
 {% endif %}
 
 {% if user.is_authenticated %}
@@ -24,8 +25,8 @@
       <h5 class="display-4">Let's get started setting up your new account</h1>
       <p>If you setup everything and see this it means you haven't received any Assets</p>  
       <a href="{% url 'edit-account' %}" class="btn btn-primary btn-lg" role="button">Setup Account information</a>
+      <a href="{% url 'edit-profile-page' %}" class="btn btn-primary btn-lg" role="button">Update Public Profile information</a>
       <a href="{% url 'edit-payment-info' %}" class="btn btn-primary btn-lg" role="button">Setup Payment information</a>
-
     {% endif %}
   </div>
 </div>
@@ -58,7 +59,69 @@
 
 <hr></hr>
 <h1>Past Transactions</h1>
+
+{% if operations|length > 0 %}
+
+<div id="container" style="width: 75%;">
+  <canvas id="line-chart"></canvas>
+</div>
+
+<br></br>
+
+<table class="table">
+  <thead>
+  <tr>
+      <th scope="col">Action</th>
+      <th scope="col">Date</th>
+      <th scope="col">Action</th>
+  </tr>
+  </thead>
+  <tbody>
+{% for operation in operations %}
+    <tr>
+      <th scope="row">Claimed Claimable Balance</th>
+      <td>{{ operation.created_at }}</td>
+      <td><a href="{{ operation.url }}" class="btn btn-primary" role="button">View Operation</a></td>
+    </tr>
+{% endfor %}
+</tbody>
+</table>
+{% else %}
 <p>No Past Transactions have been found  </p>
+{% endif%}
+
+
+{{line_chart_data}}
+
+ <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+  
+    <script>
+
+    var config = {
+      type: 'line',
+      data: {
+        datasets: [{
+          data: {{ bar_chart_values|safe }},
+          backgroundColor: [
+            '#ff6384', '#36a2eb', '#cc65fe', '#ffce56',
+          ],
+          label: 'Transactions per Day',
+          borderColor: "#bae755",
+          fill: false
+        }],
+        labels: {{ bar_chart_labels|safe }}
+      },
+      options: {
+        responsive: true
+      }
+    };
+
+    window.onload = function() {
+      var ctx = document.getElementById('line-chart').getContext('2d');
+      window.myPie = new Chart(ctx, config);
+    };
+
+  </script>
 
 
 

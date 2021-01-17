@@ -6,6 +6,7 @@ Stellar Related operations for simple use
 
 from stellar_sdk import Server, Keypair, TransactionBuilder, Network, FeeBumpTransaction, ClaimPredicate, Claimant, Asset, exceptions
 import os
+import json
 server = Server("https://horizon-testnet.stellar.org") # Todo: Not hardcode this?
 
 def getAssets(public_key: str) -> list:
@@ -16,6 +17,20 @@ def getAssets(public_key: str) -> list:
     balances_to_return = [ {"asset_code": elem.get("asset_code"), "issuer": elem.get("asset_issuer"), "balance": elem.get("balance")} for elem in balances ]
     balances_to_return[-1]["asset_code"] = "XLM"
     return balances_to_return
+
+def getOperations(public_key: str) -> list:
+    """
+    Get all the claimable_balance operations a user executed.
+    """
+    operations = server.operations().for_account(public_key).limit(200).order(desc=True).include_failed(False).call()['_embedded']['records']
+    data = []
+    for operation in operations:
+        if operation['type'] == "claim_claimable_balance":
+            data.append({"created_at": operation.get("created_at"), "url": f"https://stellar.expert/explorer/testnet/tx/{operation.get('transaction_hash')}"})
+            print(operation.get("transaction_hash"))
+            
+
+    return data
 
 def getClaimableBalances(public_key: str) -> list:
     """
@@ -169,15 +184,27 @@ def createClaimableBalance(private_key: str, destination: str, amount: str, asse
         .build()
     )
     transaction.sign(private_key)
-    response = server.submit_transaction(transaction)
-
     try:
         response = server.submit_transaction(transaction)
         print(response)
         return True, f"https://stellar.expert/explorer/testnet/tx/{response['id']}"
-    except:
-        return False
-
+    except exceptions.BadRequestError as e:
+        #print(response)
+        s = str(e)
+        data = json.loads(s)
+        print(data["extras"]["result_codes"].get("operations"))
+        try:
+            if data["extras"]["result_codes"].get("operations") is not None:
+                if data["extras"]["result_codes"]["operations"][0] == 'op_underfunded':
+                    return False, "Account doesn't have enough balance to complete the transaction."
+                elif data["extras"]["result_codes"]["operations"][0] == 'op_low_reserve':
+                    return False, "Account doesn't have enough balance to complete transaction"
+            else:
+                if data["extras"]["result_codes"]["transaction"] == "tx_insufficient_balance":
+                    return False, "Account doesn't have enough balance to complete transaction"
+        except:
+            print(data)
+        return False, "Something went wrong."
 def verifyItExists(asset :str, available_assets: list) -> bool:
 	"""
 	Check if in the balances of the account an asset like that alredy exists to establish a trustline

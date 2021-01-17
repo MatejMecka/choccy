@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <title>NotBuyMeACoffee</title>
+    <meta charSet="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="description" content="At Not Buy Me a Coffee we are aiming to deliver the best experience for receiving donations from your Fans ">
+    <meta property="og:image" content="">
+    <link rel="shortcut icon" href="https://www.launchaco.com/static/favicon.ico" />
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://www.launchaco.com/static/AllTemplates.min.css">
+
+    <style>
+      .launchaco-promo {
+        position: fixed;
+        bottom: 20px;
+        left: 20px;
+        cursor: pointer;
+        width: 0;
+        height: 0;
+        z-index: 999999;
+      }
+
+      .launchaco-promo__active {
+        width: initial;
+        height: initial;
+      }
+
+      .launchaco-promo-speechbubble {
+        font-family: -apple-system, BlinkMacSystemFont, Roboto, "Open Sans", "Helvetica Neue", sans-serif;
+        position: absolute;
+        left: 50px;
+        top: -11px;
+        padding: 9px;
+        color: white;
+        border-radius: 3px;
+        background: linear-gradient(#227ef7, #1290fc);
+        font-size: 14px;
+        font-weight: 600;
+        width: 93px;
+        box-sizing: border-box;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity .15s ease-in-out;
+      }
+
+      .launchaco-promo__active:hover .launchaco-promo-speechbubble {
+        opacity: 1;
+      }
+
+      .launchaco-promo svg {
+        transition: all .3s ease-in-out;
+        opacity: 0;
+      }
+
+      .launchaco-promo__active svg {
+        opacity: 1;
+      }
+
+      .launchaco-promo-speechbubble:before {
+        content: "";
+        width: 10px;
+        height: 10px;
+        transform: rotate(45deg);
+        left: -4px;
+        bottom: 10px;
+        border-radius: 3px;
+        background: #1290fc;
+        z-index: 2;
+        position: absolute
+      }
+
+      .launchaco-promo__active .launchaco-promo-speechbubble__animate {
+        animation: popinpopup 3s linear forwards 0.1s;
+      }
+
+      @keyframes popinpopup {
+        0% {
+          opacity: 0;
+          transform: translate3d(0, 3px, 0)
+        }
+        7%,
+        93% {
+          opacity: 1;
+          transform: translate3d(0, 0, 0)
+        }
+        100% {
+          opacity: 0;
+          transform: translate3d(0, -4px, 0)
+        }
+      }
+
+      .launchaco-promo-animate:hover {
+        opacity: 1 !important;
+      }
+    </style>
+
+
+    <style>
+    </style>
+  </head>
+
+  <body class="font-modern">
+    <div class="lightblue-gradient">
+      <!---->
+      <header class="header">
+        <div class="container-lrg">
+          <div class="flex col-12 spread">
+            <a class="logo primary-color launchaco-builder-hoverable logo">NotBuyMeACoffee</a>
+            <a href="mailto:matej.plavevski@gmail.com" class="nav-link secondary-color mr0">Contact</a>
+          </div>
+        </div>
+      </header>
+      <section class="section">
+        <div class="container mb40">
+          <div class="col-12">
+            <h1 class="heading primary-color launchaco-builder-hoverable">At Not Buy Me a Coffee we are aiming to deliver the best experience for receiving donations from your Fans </h1>
+            <h2 class="paragraph secondary-color mt20 launchaco-builder-hoverable">By using a powerful technology known as the "blockchain" to deliver funds to everyone in the world except North Korea cause they do not have internet.</h2>
+            <div class="mt40">
+              <a href="{% url 'account_signup' %}" target="_blank" class="button mobile-text-center mt10 launchaco-builder-hoverable mobile-text-center accent-bg primary-color">
+                <span> Sign Up </span>
+              </a>
+                 <a href="{% url 'account_login' %}" target="_blank" class="button mobile-text-center mt10 launchaco-builder-hoverable mobile-text-center accent-bg primary-color">
+                <span> Log in </span>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="container-lrg">
+          <div class="col-12">
+            <div class="browser mt75 launchaco-builder-hoverable">
+              <div class="mask mask__noimage">
+                <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTI4MCIgaGVpZ2h0PSI4MDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIvPg==" alt="" class="mask-img">
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+    <section id="feature-1" class="section lightblue-white" sitemeta="[object Object]" activepage="Landing">
+      <div class="container-lrg flex">
+        <div class="col-6 flex flex-column center-vertical">
+          <div class="flex mobile-flex-wrap mb20 mobile-text-center">
+            <i class="icon secondary-bg mr20 mobile-center-icon launchaco-builder-hoverable">
+              <svg class="svg-fill" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 25">
+                <path d="M20 22.494v1a.5.5 0 0 1-1 0v-1a.5.5 0 1 1 1 0zm-14.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 1 0v-1a.5.5 0 0 0-.5-.5zm7 1a10.924 10.924 0 0 1-2.494-.391l-.27 1.76a.528.528 0 0 0 .097.454.498.498 0 0 0 .387.183h4.56a.5.5 0 0 0 .49-.598l-.275-1.8a10.928 10.928 0 0 1-2.495.392zm9.06-7.44L18 11.995v9h2.5a1.5 1.5 0 0 0 1.5-1.5v-2.879a1.5 1.5 0 0 0-.44-1.06zM17 5.995v15a18.472 18.472 0 0 1-4 .974v-7.474a.5.5 0 0 0-1 0v7.474a18.47 18.47 0 0 1-4-.974v-15C8 3.67 11.553.244 12.5 0c.947.244 4.5 3.67 4.5 5.994zm-2.168 1.127A4.374 4.374 0 0 0 12.5 5.994a4.113 4.113 0 0 0-2.343 1.136.5.5 0 0 0 .686.729 3.213 3.213 0 0 1 1.657-.865 3.417 3.417 0 0 1 1.668.874.5.5 0 0 0 .664-.748zM3 16.614v2.88a1.5 1.5 0 0 0 1.5 1.5H7v-9l-3.56 3.56a1.5 1.5 0 0 0-.44 1.06z"></path>
+              </svg>
+            </i>
+            <div>
+              <h3 class="bold primary-color launchaco-builder-hoverable">Fast</h3>
+              <p class="paragraph secondary-color launchaco-builder-hoverable">With the power of Stellar transactions are instant. No need to wait in a line in a bank or wait for PayPal to process your transaction, just think of the time you will save and on what you can spend it on</p>
+            </div>
+          </div>
+          <div class="flex mobile-flex-wrap mb20 mobile-text-center">
+            <i class="icon secondary-bg mr20 mobile-center-icon launchaco-builder-hoverable">
+              <svg class="svg-fill" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 25">
+                <path d="M15.967 12H8.983a36.982 36.982 0 0 1 .289-4.256 24.254 24.254 0 0 0 3.203.22 24.254 24.254 0 0 0 3.203-.22A36.982 36.982 0 0 1 15.967 12zM8.285 7.598a23.844 23.844 0 0 1-6.224-2.007A12.428 12.428 0 0 0 0 12h7.983a37.857 37.857 0 0 1 .302-4.402zm.983 9.624A24.232 24.232 0 0 1 12.475 17a24.232 24.232 0 0 1 3.207.222A37 37 0 0 0 15.967 13H8.983a37 37 0 0 0 .285 4.222zM7.983 13H0a12.428 12.428 0 0 0 2.045 6.382 23.845 23.845 0 0 1 6.236-2.014A37.888 37.888 0 0 1 7.983 13zm7.555 5.21a23.18 23.18 0 0 0-6.126 0 22.718 22.718 0 0 0 .83 3.52c.753 2.259 1.664 3.27 2.233 3.27s1.48-1.011 2.234-3.27a22.718 22.718 0 0 0 .829-3.52zM9.418 6.756a23.223 23.223 0 0 0 6.114 0 22.655 22.655 0 0 0-.824-3.485C13.955 1.011 13.044 0 12.475 0s-1.48 1.011-2.234 3.27a22.655 22.655 0 0 0-.824 3.485zm7.25 10.613a23.845 23.845 0 0 1 6.237 2.014A12.428 12.428 0 0 0 24.949 13h-7.983a37.888 37.888 0 0 1-.298 4.368zM10.664.145a12.473 12.473 0 0 0-8 4.623 22.863 22.863 0 0 0 5.766 1.84A15.462 15.462 0 0 1 10.664.146zm3.621 24.71a12.472 12.472 0 0 0 8.02-4.65 22.872 22.872 0 0 0-5.78-1.847 15.512 15.512 0 0 1-2.24 6.497zm-11.64-4.65a12.472 12.472 0 0 0 8.02 4.65 15.512 15.512 0 0 1-2.24-6.497 22.872 22.872 0 0 0-5.78 1.847zM22.285 4.77a12.473 12.473 0 0 0-8-4.623 15.462 15.462 0 0 1 2.234 6.462 22.863 22.863 0 0 0 5.766-1.84zM16.966 12h7.983a12.428 12.428 0 0 0-2.06-6.41 23.844 23.844 0 0 1-6.225 2.008A37.857 37.857 0 0 1 16.966 12z"></path>
+              </svg>
+            </i>
+            <div>
+              <h3 class="bold primary-color launchaco-builder-hoverable">Global</h3>
+              <p class="paragraph secondary-color launchaco-builder-hoverable">Processing Fees? Waiting for one bank to open to transfer to another bank? That thing is part of the past. You can use NotBuyMeACoffee to donate to a person who doesn't even have a bank account, it's that good.</p>
+            </div>
+          </div>
+          <div class="flex mobile-flex-wrap mb20 mobile-text-center">
+            <i class="icon secondary-bg mr20 mobile-center-icon launchaco-builder-hoverable">
+              <svg class="svg-fill" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 25">
+                <path d="M12 13.732v5.293a5.498 5.498 0 0 1 5 5.475v.5H6v-.5a5.498 5.498 0 0 1 5-5.475V12a4.929 4.929 0 0 1 4-5c2.333-.459 6.958 1.042 9-1 0 3.417-3.083 9-8 9a6.519 6.519 0 0 1-4-1.268zM10 13c0-9.959-8-8.209-8-13C.964 1.036.42 2.937.146 4.925a7.001 7.001 0 0 0 6.363 7.901C7.705 12.93 8.917 13 10 13z"></path>
+              </svg>
+            </i>
+            <div>
+              <h3 class="bold primary-color launchaco-builder-hoverable">You're in Control</h3>
+              <p class="paragraph secondary-color launchaco-builder-hoverable">You own all the assets you collect and only you have access to it. Nobody can freeze your account or charge you fees for having an open account</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-6 flex center-horizontal center-vertical">
+          <div class="launchaco-builder-hoverable">
+            <div class="">
+              <img src="https://cdn.launchaco.com/images/35425440-bdfc-4449-8048-bfb896a3ec5e.png" alt="Screenshot of small App" class="custom-img">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="faq-2" class="section lightblue-white" sitemeta="[object Object]" activepage="Landing">
+      <div class="container">
+        <div class="col-12 text-center">
+          <h3 class="heading primary-color launchaco-builder-hoverable">
+            Frequently Asked Questions
+          </h3>
+          <p class="subheading secondary-color mt20 launchaco-builder-hoverable">Can't find an answer? Don't hesitate to reach out!.</p>
+        </div>
+      </div>
+      <div class="container">
+        <div class="col-12 mt40">
+          <div class="faq pad20">
+            <b class="bold primary-color launchaco-builder-hoverable">
+              Question Here
+            </b>
+            <p class="paragraph secondary-color launchaco-builder-hoverable">
+              Answer here
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <footer id="footer-3" class="section text-center lightblue-white" sitemeta="[object Object]" activepage="Landing">
+      <div class="container col-12">
+        <!---->
+        <div>
+          <a href="https://twitter.com/matejmecka" target="_blank" class="socialicons accent-bg twitter"></a>
+          <a href="https://facebook.com/matej.plavevski" target="_blank" class="socialicons accent-bg facebook"></a>
+          <a href="mailto:matej.plavevski@gmail.com" class="socialicons accent-bg email"></a>
+        </div>
+        <div class="mt50">
+          <span class="span secondary-color">©</span>
+          <span class="span secondary-color">2021 Matej Plavevski</span>
+        </div>
+      </div>
+    </footer>
+
+    <a id="visual-dreamer" class="launchaco-promo" target="_blank" href="https://www.launchaco.com/">
+      <svg width="40" height="40" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient x1="9.394%" y1="57.704%" x2="105.69%" y2="27.607%" id="a">
+            <stop stop-color="#007FFF" offset="0%" />
+            <stop stop-color="#1290FC" offset="100%" />
+          </linearGradient>
+          <linearGradient x1="50%" y1="0%" x2="50%" y2="137.557%" id="b">
+            <stop stop-color="#FF9386" offset="0%" />
+            <stop stop-color="#FF5F86" offset="100%" />
+          </linearGradient>
+          <linearGradient x1="30.817%" y1="-31.6%" x2="63.808%" y2="151.297%" id="c">
+            <stop stop-color="#D7EDFF" offset="0%" />
+            <stop stop-color="#FFF" stop-opacity="0" offset="100%" />
+          </linearGradient>
+        </defs>
+        <g fill="none">
+          <circle fill="url(#a)" cx="19.832" cy="19.832" r="19.832" />
+          <path d="M26.616.325l4.308 12.587-4.669-.315L26.218.388c0-.105.091-.19.204-.191.088 0 .166.051.194.128z" fill="url(#b)" transform="rotate(45 28.571 6.555)" />
+          <path d="M32.031 35.658c-6.164 2.721-12.745-4.33-11.992-10.011 2.617.782 4.626.997 7.904 2.01 2.34.769 4.152.479 5.386-1.13 1.234-1.607 1.316-3.502 0-5.158-4.826-5.49 0 0-10.516-12.264l2.923-2.95C.117 4.123 5.302 32.333 6.903 35.095c4.01 3.54 14.11 8.709 25.128.563z"
+            fill="#FFF" />
+          <path d="M9.782 19.176l-.034-.016c0 5.76 4.425 21.794 22.185 16.378-6.148 2.716-12.71-4.29-12.006-9.97a7.394 7.394 0 0 1-2.73.519c-3.922 0-7.135-3.047-7.415-6.911z" fill="url(#c)" />
+          <ellipse fill="#354158" cx="22.185" cy="14.958" rx="2.017" ry="1.849" />
+          <ellipse fill="#354158" cx="22.185" cy="14.958" rx="2.017" ry="1.849" />
+        </g>
+      </svg>
+      <div class="launchaco-promo-speechbubble launchaco-promo-speechbubble__animate">Built With Launchaco</div>
+      <div class="launchaco-promo-speechbubble">Built With Launchaco</div>
+    </a>
+  </body>
+
+</html>
