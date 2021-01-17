@@ -1,0 +1,118 @@
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  position: relative;
+  min-height: 100%;
+  font-size: 14px;
+}
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+body {
+  margin-bottom: 60px; /* Margin bottom by footer height */
+}
+
+.container {
+  max-width: 960px;
+}
+
+.pricing-header {
+  max-width: 700px;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 60px; /* Set the fixed height of the footer here */
+  line-height: 60px; /* Vertically center the text there */
+  background-color: #f5f5f5;
+}
+
+.launchaco-promo {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  cursor: pointer;
+  width: 0;
+  height: 0;
+  z-index: 999999;
+}
+
+.launchaco-promo__active {
+  width: initial;
+  height: initial;
+}
+
+.launchaco-promo-speechbubble {
+  font-family: -apple-system, BlinkMacSystemFont, Roboto, "Open Sans", "Helvetica Neue", sans-serif;
+  position: absolute;
+  left: 50px;
+  top: -11px;
+  padding: 9px;
+  color: white;
+  border-radius: 3px;
+  background: linear-gradient(#227ef7, #1290fc);
+  font-size: 14px;
+  font-weight: 600;
+  width: 93px;
+  box-sizing: border-box;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .15s ease-in-out;
+}
+
+/* Launchaco stuff */
+
+.launchaco-promo__active:hover .launchaco-promo-speechbubble {
+  opacity: 1;
+}
+
+.launchaco-promo svg {
+  transition: all .3s ease-in-out;
+  opacity: 0;
+}
+
+.launchaco-promo__active svg {
+  opacity: 1;
+}
+
+.launchaco-promo-speechbubble:before {
+  content: "";
+  width: 10px;
+  height: 10px;
+  transform: rotate(45deg);
+  left: -4px;
+  bottom: 10px;
+  border-radius: 3px;
+  background: #1290fc;
+  z-index: 2;
+  position: absolute
+}
+
+.launchaco-promo__active .launchaco-promo-speechbubble__animate {
+  animation: popinpopup 3s linear forwards 0.1s;
+}
+
+@keyframes popinpopup {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 3px, 0)
+  }
+  7%,
+  93% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0)
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(0, -4px, 0)
+  }
+}
+
+.launchaco-promo-animate:hover {
+  opacity: 1 !important;
+}

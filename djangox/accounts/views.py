@@ -139,6 +139,7 @@ def edit_profile_page(request):
             try:
                 user = PublicProfile.objects.get(accountId=request.user.id)
                 f = EditProfile(request.POST, instance=user)
+                f.save()
             except PublicProfile.DoesNotExist:
                 data = form.data
                 f = PublicProfile.objects.create(accountId=CustomUser.objects.get(username=request.user.username), 
@@ -211,4 +212,4 @@ def view_user(request, username):
                         messages.error(request, f'Transaction failed: {url}')
 
 
-    return render(request, 'account/user_profile.html', {"user": user, "public_info": public_info, "form": form})
+    return render(request, 'account/user_profile.html', {"auser": user, "public_info": public_info, "form": form})

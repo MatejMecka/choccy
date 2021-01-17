@@ -89,7 +89,31 @@ def claimBalance(id: str, private_key: str, asset=None, asset_issuer=None):
     except exceptions.NotFoundError:
         return False, "No Claimable balance has been found"
     except:
+        print(transaction.to_xdr())
+        """
         our_keypair = Keypair.from_secret(os.environ["STELLAR_PRIVATE_KEY"])
+        if asset is not None and asset_issuer is not None:
+            transaction = TransactionBuilder(
+                source_account=account,
+                network_passphrase=Network.TESTNET_NETWORK_PASSPHRASE
+            ).append_begin_sponsoring_future_reserves_op(
+                sponsored_id=user_pub_key,
+                source=our_keypair.public_key
+            ).append_change_trust_op(
+                asset_code=asset, 
+                asset_issuer=asset_issuer,
+                source=our_keypair.public_key
+            ).append_end_sponsoring_future_reserves_op(
+                source=user_pub_key
+            ).append_claim_claimable_balance_op(
+                balance_id=id,
+                source=user_pub_key
+            ).build()
+
+            transaction.sign(private_key)
+            transaction.sign(our_keypair.secret)
+        """
+        
         fee_bump_tx = TransactionBuilder.build_fee_bump_transaction(
             fee_source=our_keypair, 
             base_fee=base_fee, 
@@ -97,6 +121,7 @@ def claimBalance(id: str, private_key: str, asset=None, asset_issuer=None):
             network_passphrase=Network.TESTNET_NETWORK_PASSPHRASE
         )
 
+        print(fee_bump_tx.to_xdr())
         fee_bump_tx.sign(os.environ["STELLAR_PRIVATE_KEY"])
         response = server.submit_transaction(fee_bump_tx)
         

@@ -1,16 +1,27 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 
   <head>
-    <title>NotBuyMeACoffee</title>
+    <title>FundMy.Space</title>
     <meta charSet="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="description" content="At Not Buy Me a Coffee we are aiming to deliver the best experience for receiving donations from your Fans ">
+    <meta name="description" content="At FundMy.Space we are aiming to deliver the best experience for receiving donations from your Fans ">
     <meta property="og:image" content="">
     <link rel="shortcut icon" href="https://www.launchaco.com/static/favicon.ico" />
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400" rel="stylesheet">
 
     <link rel="stylesheet" href="https://www.launchaco.com/static/AllTemplates.min.css">
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-6QPJFM8PK5"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-6QPJFM8PK5');
+    </script>
 
     <style>
       .launchaco-promo {
@@ -108,7 +119,7 @@
       <header class="header">
         <div class="container-lrg">
           <div class="flex col-12 spread">
-            <a class="logo primary-color launchaco-builder-hoverable logo">NotBuyMeACoffee</a>
+            <a class="logo primary-color launchaco-builder-hoverable logo">FundMy.Space</a>
             <a href="mailto:matej.plavevski@gmail.com" class="nav-link secondary-color mr0">Contact</a>
           </div>
         </div>
@@ -116,8 +127,8 @@
       <section class="section">
         <div class="container mb40">
           <div class="col-12">
-            <h1 class="heading primary-color launchaco-builder-hoverable">At Not Buy Me a Coffee we are aiming to deliver the best experience for receiving donations from your Fans </h1>
-            <h2 class="paragraph secondary-color mt20 launchaco-builder-hoverable">By using a powerful technology known as the "blockchain" to deliver funds to everyone in the world except North Korea cause they do not have internet.</h2>
+            <h1 class="heading primary-color launchaco-builder-hoverable">At FundMy.Space we are aiming to deliver the best experience for receiving donations from your Fans </h1>
+            <h2 class="paragraph secondary-color mt20 launchaco-builder-hoverable">By harnessing the power of the blockchain we deliver funds to everyone in the world.</h2>
             <div class="mt40">
               <a href="{% url 'account_signup' %}" target="_blank" class="button mobile-text-center mt10 launchaco-builder-hoverable mobile-text-center accent-bg primary-color">
                 <span> Sign Up </span>
@@ -132,7 +143,7 @@
           <div class="col-12">
             <div class="browser mt75 launchaco-builder-hoverable">
               <div class="mask mask__noimage">
-                <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTI4MCIgaGVpZ2h0PSI4MDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIvPg==" alt="" class="mask-img">
+                <img src="{% static 'images/browser.png' %}" alt="" class="mask-img">
               </div>
             </div>
           </div>

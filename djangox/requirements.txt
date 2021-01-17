@@ -5,3 +5,4 @@ django-debug-toolbar==3.2
 whitenoise==5.2.0
 stellar-sdk==3.0.0
 python-dateutil
+gunicorn
